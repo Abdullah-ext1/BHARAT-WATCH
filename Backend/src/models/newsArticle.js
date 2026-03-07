@@ -13,11 +13,11 @@ const newsArticleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  publishedAt: {
+  pubDate: {
     type: Date,
     required: true,
   },
-  incidenteType: {
+  incidentType: {
     type: String,
     enum: ["Rape", "Murder", "Kidnapping", "Assault", "Protest", "Riot", "Rally", "Other"],
     default: "Other",
