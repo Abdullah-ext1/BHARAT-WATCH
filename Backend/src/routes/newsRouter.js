@@ -1,0 +1,1 @@
+import { getAllNews } from "../controllers/newsController";

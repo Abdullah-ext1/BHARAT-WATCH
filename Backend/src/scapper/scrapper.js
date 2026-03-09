@@ -59,12 +59,8 @@ async function fetchAllNews(){
       }
     }
   }
-  process.exit(1)
 }
 
-connectDB()
-.then(fetchAllNews)
-.catch((err) => {
-  console.error("Error while connecting to the database", err)
-  process.exit(1);
-})
+export {
+  fetchAllNews,
+}
