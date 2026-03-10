@@ -1,4 +1,5 @@
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
+import { useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
 
@@ -22,23 +23,65 @@ const mockArticles = [
   { title: "Communal riots in Nagpur after Friday prayers", incidentType: "Riot", location: { city: "Nagpur", lat: 21.1458, lng: 79.0882 }, source: "IE", pubDate: new Date() },
 ];
 
-const Map = ({ activeFilter, isDark }) => {
-  const filtered = activeFilter === 'all'
-    ? mockArticles.filter(a => a.location?.lat)
-    : mockArticles.filter(a => a.incidentType === activeFilter && a.location?.lat);
+const Map = ({ activeFilter }) => {
+  const [mapLightMode, setMapLightMode] = useState(false);
 
-  const tileUrl = isDark
-    ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-    : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+  // India bounds to lock the map
+  const indiaBounds = [
+    [7.0, 68.0],  // Southwest corner
+    [33.5, 95.5]  // Northeast corner
+    // [5.0, 65.0],  // Southwest corner
+    // [38.0, 100.0]  // Northeast corner
+  ];
 
-  const popupClass = isDark ? "dark-popup" : "light-popup";
+  let filtered;
+  if (activeFilter === 'all') {
+    filtered = mockArticles.filter(a => a.location?.lat);
+  } else {
+    filtered = mockArticles.filter(a => a.incidentType === activeFilter && a.location?.lat);
+  }
+
+  let tileUrl;
+  if (mapLightMode) {
+    tileUrl = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+  } else {
+    tileUrl = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+  }
+
+  let popupClass;
+  if (mapLightMode) {
+    popupClass = "light-popup";
+  } else {
+    popupClass = "dark-popup";
+  }
+
+  let mapWrapperClass;
+  if (mapLightMode) {
+    mapWrapperClass = "map-wrapper light";
+  } else {
+    mapWrapperClass = "map-wrapper dark";
+  }
+
+  let buttonText;
+  if (mapLightMode) {
+    buttonText = "MAP DARK";
+  } else {
+    buttonText = "MAP LIGHT";
+  }
 
   return (
-    <div className={`map-wrapper ${isDark ? 'dark' : 'light'}`}>
+    <div className={mapWrapperClass}>
+      <button className="map-light-toggle" onClick={() => setMapLightMode(!mapLightMode)}>
+        {buttonText}
+      </button>
       <MapContainer
-        center={[20.5937, 78.9629]}
-        zoom={5}
+        center={[22.5, 82.0]}
+        zoom={4}
         zoomControl={false}
+        maxBounds={indiaBounds}
+        maxBoundsViscosity={1.0}
+        minZoom={4}
+        maxZoom={12}
         className="map"
       >
         <TileLayer

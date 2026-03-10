@@ -37,6 +37,18 @@ const StatsPanel = () => {
   });
   const hotZones = Object.entries(cityCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
 
+  let hotZonesContent;
+  if (hotZones.length > 0) {
+    hotZonesContent = hotZones.map(([city, n]) => (
+      <div className="hot-zone-row" key={city}>
+        <span>{city}</span>
+        <span style={{ color: '#ff3d57' }}>{n}</span>
+      </div>
+    ));
+  } else {
+    hotZonesContent = <div>-- NO DATA --</div>;
+  }
+
   return (
     <div className="stats-panel">
       <div className="panel-header"><span>ANALYTICS</span></div>
@@ -56,9 +68,15 @@ const StatsPanel = () => {
       <div className="stat-block">
         <div className="stat-label">Threat Index</div>
         <div className="threat-level">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className={`threat-seg ${i < 4 ? 'active' : ''}`}></div>
-          ))}
+          {[...Array(5)].map((_, i) => {
+            let activeClass = '';
+            if (i < 4) {
+              activeClass = 'active';
+            }
+            return (
+              <div key={i} className={`threat-seg ${activeClass}`}></div>
+            );
+          })}
         </div>
         <div className="stat-sub" style={{ marginTop: 6 }}>ELEVATED // MONITOR</div>
       </div>
@@ -87,12 +105,7 @@ const StatsPanel = () => {
       <div className="stat-block">
         <div className="stat-label">Hot Zones</div>
         <div className="hot-zones">
-          {hotZones.length ? hotZones.map(([city, n]) => (
-            <div className="hot-zone-row" key={city}>
-              <span>{city}</span>
-              <span style={{ color: '#ff3d57' }}>{n}</span>
-            </div>
-          )) : <div>-- NO DATA --</div>}
+          {hotZonesContent}
         </div>
       </div>
     </div>

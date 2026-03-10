@@ -23,6 +23,29 @@
   z-index: 400;
 }
 
+.map-light-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 600;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.map-light-toggle:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
 .corner-tag {
   position: absolute;
   font-family: 'Share Tech Mono', monospace;
