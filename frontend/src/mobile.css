@@ -217,10 +217,18 @@
   .mobile-side-panel .feed-item {
     padding: 12px;
     border-left-width: 3px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .mobile-side-panel .feed-title {
     font-size: 13px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    width: 100%;
+    max-width: 100%;
   }
 
   .mobile-side-panel .feed-meta {

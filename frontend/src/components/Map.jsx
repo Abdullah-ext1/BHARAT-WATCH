@@ -20,8 +20,8 @@ const Map = ({ activeFilter, articles = [] }) => {
   const isMobile = window.innerWidth <= 768;
   const initialZoom = isMobile ? 3.5 : 4;
   
-  // India bounds to lock the map
-  const indiaBounds = [
+  // India bounds to lock the map (desktop only)
+  const indiaBounds = isMobile ? [9.0, 72.0] : [
     [7.0, 68.0],  // Southwest corner
     [33.5, 95.5]  // Northeast corner
   ];
