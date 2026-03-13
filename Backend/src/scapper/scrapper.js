@@ -12,7 +12,7 @@ const TOPICS = [
   { keyword: "protest violent india", type: "Protest" },
   { keyword: "violent murder india", type: "Murder" },
   { keyword: "violent riots india", type: "Riot" },
-  { keyword: "Rally rally india", type: "Rally" }
+  { keyword: "Rally violent india", type: "Rally" }
 ]
 
 async function fetchNews(keyword) {
