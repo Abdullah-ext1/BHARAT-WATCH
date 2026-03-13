@@ -1,0 +1,377 @@
+/* Mobile Responsive Styles */
+/* This file makes the app responsive for mobile devices */
+
+@media (max-width: 1024px) {
+  /* Tablets and small screens */
+  .main {
+    grid-template-columns: 1fr !important;
+  }
+
+  .filter-panel,
+  .stats-panel {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile devices */
+
+  /* ===== LAYOUT ===== */
+  body {
+    overflow: hidden;
+  }
+
+  .main {
+    grid-template-columns: 1fr !important;
+  }
+
+  .filter-panel,
+  .stats-panel {
+    display: none !important;
+  }
+
+  .app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh; /* Mobile viewport height */
+  }
+
+  .header {
+    height: 40px;
+    padding: 0 12px;
+  }
+
+  .logo {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .version {
+    font-size: 8px;
+    margin-left: 4px;
+  }
+
+  .header-meta {
+    gap: 12px;
+    display: none; /* Hide meta on mobile, show in side panel */
+  }
+
+  .theme-toggle {
+    padding: 4px 8px;
+    font-size: 8px;
+    display: block;
+  }
+
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    grid-template-columns: none;
+    position: relative;
+  }
+
+  .map-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== SIDE PANEL TOGGLE ===== */
+  .mobile-panel-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
+  }
+
+  .mobile-panel-toggle:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 6px rgba(0, 229, 255, 0.5);
+  }
+
+  /* Position for feed button (left) */
+  .mobile-feed-btn {
+    bottom: 80px;
+    left: 20px;
+  }
+
+  /* Position for stats button (right) */
+  .mobile-stats-btn {
+    bottom: 80px;
+    left: auto;
+    right: 20px;
+  }
+
+  /* ===== SIDE PANEL CONTAINER ===== */
+  .mobile-side-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--panel);
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .mobile-side-panel.open {
+    transform: translateX(0);
+  }
+
+  .mobile-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+    flex-shrink: 0;
+  }
+
+  .mobile-panel-header h2 {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .mobile-panel-close {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 2px;
+    transition: all 0.15s;
+  }
+
+  .mobile-panel-close:active {
+    background: rgba(0, 229, 255, 0.1);
+    border-color: var(--accent);
+  }
+
+  /* ===== MOBILE PANEL CONTENT ===== */
+  .mobile-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+    padding: 0;
+  }
+
+  /* Panels inside mobile overlay should be visible */
+  .mobile-side-panel .filter-panel {
+    display: flex !important;
+    background: transparent;
+    border-right: none;
+    width: auto;
+    flex-direction: column;
+  }
+
+  .mobile-side-panel .filter-panel .panel-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mobile-side-panel .filter-panel .filters {
+    padding: 8px;
+    gap: 4px;
+    border-bottom: none;
+  }
+
+  .mobile-side-panel .filter-btn {
+    padding: 8px 12px;
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .mobile-side-panel .filter-panel .feed {
+    overflow-y: auto;
+    max-height: 300px;
+  }
+
+  .mobile-side-panel .feed-item {
+    padding: 12px;
+    border-left-width: 3px;
+  }
+
+  .mobile-side-panel .feed-title {
+    font-size: 13px;
+  }
+
+  .mobile-side-panel .feed-meta {
+    font-size: 10px;
+    gap: 8px;
+  }
+
+  .mobile-side-panel .stats-panel {
+    display: flex !important;
+    background: transparent;
+    border-left: none;
+    width: auto;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .mobile-side-panel .stat-block {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mobile-side-panel .stat-label {
+    font-size: 10px;
+  }
+
+  .mobile-side-panel .stat-value {
+    font-size: 24px;
+  }
+
+  .mobile-side-panel .bar-chart {
+    padding: 12px;
+  }
+
+  .mobile-side-panel .threat-level {
+    gap: 3px;
+  }
+
+  .mobile-side-panel .threat-seg {
+    height: 5px;
+  }
+
+  /* Filter Panel on Mobile */
+  .filter-panel {
+    background: transparent;
+    border-right: none;
+    width: auto;
+    display: none !important;
+  }
+
+  /* Stats Panel on Mobile */
+  .stats-panel {
+    background: transparent;
+    border-left: none;
+    width: auto;
+    display: none !important;
+  }
+
+  /* ===== TICKER ===== */
+  .ticker {
+    display: none;
+  }
+
+  /* ===== MAP BUTTON ===== */
+  .map-light-toggle {
+    top: 8px;
+    right: 8px;
+    padding: 6px 10px;
+    font-size: 9px;
+  }
+
+  .corner-tag {
+    font-size: 8px;
+    opacity: 0.2;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Small phones */
+
+  .header {
+    height: 36px;
+  }
+
+  .logo {
+    font-size: 10px;
+  }
+
+  .theme-toggle {
+    padding: 3px 6px;
+    font-size: 7px;
+  }
+
+  .mobile-panel-toggle {
+    bottom: 16px;
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+
+  .mobile-feed-btn {
+    bottom: 76px;
+    left: 16px;
+  }
+
+  .mobile-stats-btn {
+    bottom: 76px;
+    right: 16px;
+  }
+
+  .filter-btn {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+
+  .feed-item {
+    padding: 10px;
+  }
+
+  .feed-title {
+    font-size: 12px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  .map-light-toggle {
+    padding: 4px 8px;
+    font-size: 8px;
+  }
+}
+
+/* ===== DESKTOP (restore normal layout) ===== */
+@media (min-width: 1025px) {
+  .mobile-panel-toggle,
+  .mobile-side-panel {
+    display: none !important;
+  }
+
+  .filter-panel,
+  .stats-panel {
+    display: flex !important;
+  }
+
+  .main {
+    display: grid !important;
+    grid-template-columns: 280px 1fr 260px !important;
+  }
+
+  .ticker {
+    display: block !important;
+  }
+}

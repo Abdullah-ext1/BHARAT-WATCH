@@ -9,6 +9,10 @@ lerna-debug.log*
 
 FRONTEND_GUIDE.md
 FRONTEND_EXPLAINED.md
+BACKEND_INTEGRATION.md
+MOBILE_CSS_FIX.md
+MOBILE_DESIGN.md
+MOBILE_LANDING.md
 
 node_modules
 dist

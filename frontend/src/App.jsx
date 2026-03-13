@@ -7,6 +7,7 @@ import StatsPanel from './components/StatsPanel.jsx';
 import Ticker from "./components/Ticker.jsx"
 import Loading from './components/Loading.jsx';
 import './App.css';
+import './mobile.css';
 
 const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
 
@@ -16,12 +17,15 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [articles, setArticles] = useState([]);
   const [lastSync, setLastSync] = useState('--:--:--');
+  const [isFeedPanelOpen, setIsFeedPanelOpen] = useState(false);
+  const [isStatsPanelOpen, setIsStatsPanelOpen] = useState(false);
 
   // Fetch articles from backend
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get(BACKEND_URL);
+        const newsUrl = `${BACKEND_URL}/news`;
+        const response = await axios.get(newsUrl);
         const data = response.data.data || [];
         setArticles(data);
         
@@ -82,6 +86,58 @@ const App = () => {
         <StatsPanel articles={articles} />
       </div>
       <Ticker />
+
+      {/* Mobile Live Feed Panel */}
+      <div className={`mobile-side-panel ${isFeedPanelOpen ? 'open' : ''}`}>
+        <div className="mobile-panel-header">
+          <h2>LIVE FEED</h2>
+          <button 
+            className="mobile-panel-close" 
+            onClick={() => setIsFeedPanelOpen(false)}
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="mobile-panel-content">
+          <FilterPanel 
+            activeFilter={activeFilter} 
+            onFilterChange={setActiveFilter} 
+            articles={articles}
+          />
+        </div>
+      </div>
+
+      {/* Mobile Analytics Panel */}
+      <div className={`mobile-side-panel ${isStatsPanelOpen ? 'open' : ''}`}>
+        <div className="mobile-panel-header">
+          <h2>ANALYTICS</h2>
+          <button 
+            className="mobile-panel-close" 
+            onClick={() => setIsStatsPanelOpen(false)}
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="mobile-panel-content">
+          <StatsPanel articles={articles} />
+        </div>
+      </div>
+
+      {/* Mobile Toggle Buttons */}
+      <button 
+        className="mobile-panel-toggle mobile-feed-btn"
+        onClick={() => setIsFeedPanelOpen(true)}
+      >
+        📰 FEED
+      </button>
+      <button 
+        className="mobile-panel-toggle mobile-stats-btn"
+        onClick={() => setIsStatsPanelOpen(true)}
+      >
+        📊 STATS
+      </button>
     </div>
   );
 };
