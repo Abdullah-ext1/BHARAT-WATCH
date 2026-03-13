@@ -16,7 +16,6 @@ const typeColors = {
 const Map = ({ activeFilter }) => {
   const [mapLightMode, setMapLightMode] = useState(false);
   const [articles, setArticles] = useState([]);
-  const [hoveredCity, setHoveredCity] = useState(null);
   // India bounds to lock the map
   const indiaBounds = [
     [7.0, 68.0],  // Southwest corner
@@ -39,17 +38,6 @@ const Map = ({ activeFilter }) => {
   } else {
     filtered = articles.filter(a => a.incidentType === activeFilter && a.location?.lat);
   }
-
-  // Build unique cities with their coordinates for boundary circles
-  const cityMap = {};
-  filtered.forEach(a => {
-    const city = a.location.city;
-    if (city && !cityMap[city]) {
-      cityMap[city] = { lat: a.location.lat, lng: a.location.lng, count: 0 };
-    }
-    if (city) cityMap[city].count++;
-  });
-  const cities = Object.entries(cityMap);
 
   let tileUrl;
   if (mapLightMode) {
@@ -99,56 +87,27 @@ const Map = ({ activeFilter }) => {
           attribution="©OpenStreetMap ©CARTO"
         />
 
-        {/* City boundary highlight circles */}
-        {cities.map(([city, data]) => {
-          const isHovered = hoveredCity === city;
-          return (
-            <CircleMarker
-              key={`border-${city}`}
-              center={[data.lat, data.lng]}
-              radius={isHovered ? 30 : 18}
-              pathOptions={{
-                color: isHovered ? '#00ff88' : 'transparent',
-                fillColor: isHovered ? '#00ff88' : 'transparent',
-                fillOpacity: isHovered ? 0.15 : 0,
-                weight: isHovered ? 2 : 0,
-                dashArray: isHovered ? '6 4' : ''
-              }}
-              interactive={false}
-            />
-          );
-        })}
-
-        {/* Incident markers */}
-        {filtered.map((article, i) => {
-          const isHovered = hoveredCity === article.location.city;
-
-          return (
-            <CircleMarker
-              key={i}
-              center={[article.location.lat, article.location.lng]}
-              radius={isHovered ? 12 : 8}
-              pathOptions={{
-                color: typeColors[article.incidentType] || typeColors.Other,
-                fillColor: typeColors[article.incidentType] || typeColors.Other,
-                fillOpacity: isHovered ? 1 : 0.8,
-                weight: isHovered ? 4 : 2
-              }}
-              eventHandlers={{
-                mouseover: () => setHoveredCity(article.location.city),
-                mouseout: () => setHoveredCity(null)
-              }}
-            >
-              <Popup className={popupClass}>
-                <div className="popup-type" style={{ color: typeColors[article.incidentType] }}>
-                  {article.incidentType} // {article.location.city}
-                </div>
-                <div className="popup-title">{article.title}</div>
-                <div className="popup-meta">{article.source} // {new Date(article.pubDate).toLocaleDateString()}</div>
-              </Popup>
-            </CircleMarker>
-          );
-        })}
+        {filtered.map((article, i) => (
+          <CircleMarker
+            key={i}
+            center={[article.location.lat, article.location.lng]}
+            radius={8}
+            pathOptions={{
+              color: typeColors[article.incidentType] || typeColors.Other,
+              fillColor: typeColors[article.incidentType] || typeColors.Other,
+              fillOpacity: 0.8,
+              weight: 2
+            }}
+          >
+            <Popup className={popupClass}>
+              <div className="popup-type" style={{ color: typeColors[article.incidentType] }}>
+                {article.incidentType} // {article.location.city}
+              </div>
+              <div className="popup-title">{article.title}</div>
+              <div className="popup-meta">{article.source} // {new Date(article.pubDate).toLocaleDateString()}</div>
+            </Popup>
+          </CircleMarker>
+        ))}
       </MapContainer>
 
       <div className="corner-tag tl">LAT 20.5937° N</div>
