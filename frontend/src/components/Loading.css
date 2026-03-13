@@ -43,6 +43,9 @@
   text-transform: uppercase;
   margin: 0;
 }
+.loading-title span {
+  color:  #ff3d57;
+}
 
 .loading-subtitle {
   font-family: 'Rajdhani', sans-serif;

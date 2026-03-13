@@ -5,7 +5,7 @@ const Loading = () => {
     <div className="loading-container">
       <div className="loading-content">
         <div className="loading-spinner"></div>
-        <h1 className="loading-title">INDIA MONITOR</h1>
+        <h1 className="loading-title"><span className='font-extrabold '>भारत</span>-WATCH</h1>
         <p className="loading-subtitle">Initializing System...</p>
         <div className="loading-progress">
           <div className="loading-bar"></div>
