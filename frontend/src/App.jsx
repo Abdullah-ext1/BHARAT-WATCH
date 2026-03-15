@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header.jsx';
@@ -7,7 +8,6 @@ import StatsPanel from './components/StatsPanel.jsx';
 import Ticker from "./components/Ticker.jsx"
 import Loading from './components/Loading.jsx';
 import './App.css';
-import { Analytics } from "@vercel/analytics/next"
 
 const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
 
