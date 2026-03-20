@@ -56,6 +56,14 @@ async function fetchNews(keyword) {
 async function fetchAllNews() {
   for (const topic of TOPICS) {
     const items = await fetchNews(topic.keyword)
+
+    const filtered = items.filter(item => {
+      const date = new Date(item.pubDate)
+      return date.getFullYear() >= 2025
+    })
+
+    console.log(filtered)
+
     for (const item of items) {
       const newsSource = item.title;
       const str = newsSource.split("-")

@@ -1,0 +1,460 @@
+/* IncidentCard.css - Beautiful Swipeable Card Component */
+
+.incident-card-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1001;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.incident-card-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Main Card */
+.incident-card {
+  background: var(--panel);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+
+.incident-card:active {
+  cursor: grabbing;
+}
+
+/* Card Header */
+.card-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease;
+}
+
+.card-type-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+  white-space: nowrap;
+  font-family: 'Share Tech Mono', monospace;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-location {
+  font-size: 13px;
+  color: var(--text-bright);
+  font-weight: 600;
+  flex: 1;
+  font-family: 'Rajdhani', sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Card Body */
+.card-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.card-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.card-body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+.card-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-bright);
+  line-height: 1.4;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.card-description {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Card Meta */
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(0, 229, 255, 0.05);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+}
+
+.meta-item {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.meta-label {
+  color: var(--accent);
+  font-weight: 600;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 70px;
+}
+
+.meta-value {
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  word-break: break-word;
+}
+
+/* Read More Link */
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--accent), rgba(0, 229, 255, 0.6));
+  color: var(--bg);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  font-family: 'Rajdhani', sans-serif;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.card-link:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
+}
+
+.card-link:active {
+  transform: translateX(2px);
+}
+
+/* Card Footer - Navigation */
+.card-footer {
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+  background: rgba(0, 229, 255, 0.02);
+}
+
+.card-nav-btn {
+  flex: 1;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-family: 'Rajdhani', sans-serif;
+  text-transform: uppercase;
+}
+
+.card-nav-btn:hover:not(:disabled) {
+  background: rgba(0, 229, 255, 0.1);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.card-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.card-nav-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Pagination */
+.card-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.pagination-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-dot.active {
+  background: var(--accent);
+  width: 24px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.pagination-dot:hover {
+  background: var(--accent);
+  transform: scale(1.1);
+}
+
+.pagination-text {
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 600;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+}
+
+/* Swipe Hint */
+.swipe-hint {
+  text-align: center;
+  padding: 8px;
+  font-size: 11px;
+  color: var(--text);
+  opacity: 0.6;
+  font-family: 'Rajdhani', sans-serif;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Close Button */
+.card-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-close-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  transform: rotate(90deg) scale(1.1);
+}
+
+.card-close-btn:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+/* Light Mode Adjustments */
+.light .incident-card {
+  background: var(--panel);
+}
+
+.light .card-link {
+  background: linear-gradient(135deg, #0077aa, rgba(0, 119, 170, 0.6));
+  color: white;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .incident-card-container {
+    width: 100%;
+  }
+
+  .incident-card {
+    border-radius: 24px 24px 0 0;
+    max-height: 90vh;
+  }
+
+  .card-header {
+    padding: 14px;
+  }
+
+  .card-body {
+    padding: 16px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-nav-btn {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+
+  .pagination-text {
+    font-size: 11px;
+  }
+
+  .card-close-btn {
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .incident-card-overlay {
+    align-items: flex-end;
+  }
+
+  .incident-card {
+    max-height: 95vh;
+  }
+
+  .card-title {
+    font-size: 15px;
+  }
+
+  .card-description {
+    font-size: 13px;
+  }
+
+  .card-footer {
+    flex-wrap: wrap;
+  }
+
+  .card-nav-btn {
+    flex: 1 1 45%;
+    padding: 8px;
+    font-size: 10px;
+  }
+
+  .pagination-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .pagination-dot.active {
+    width: 20px;
+  }
+}
+
+/* Dark Mode (default) */
+:root {
+  --bg: #030608;
+  --panel: #070d10;
+  --border: #0f2a32;
+  --accent: #00e5ff;
+  --text: #8ab8c2;
+  --text-bright: #cee8ed;
+}
+
+.dark {
+  --bg: #030608;
+  --panel: #070d10;
+  --border: #0f2a32;
+  --accent: #00e5ff;
+  --text: #8ab8c2;
+  --text-bright: #cee8ed;
+}
+
+/* Light Mode */
+.light {
+  --bg: #f0f4f8;
+  --panel: #ffffff;
+  --border: #d1dde6;
+  --accent: #0077aa;
+  --text: #445566;
+  --text-bright: #112233;
+}
